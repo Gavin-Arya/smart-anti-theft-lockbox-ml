@@ -1,0 +1,61 @@
+Cross-validation by session (5 folds, whole sessions held out), hard-vote forest
+Classes: ['carried', 'idle', 'knock', 'shake']   (shake and carried merged: False)
+Real records: 1560
+
+Baseline (10 trees, depth 7, raw features): accuracy 0.895, false alarms 3.9%, missed tamper 6.4%
+
+Top settings tried (ranked by macro F1; the best of many tries is slightly optimistic):
+  RF derived=True  trees=40 depth=8 leaf=2  acc=0.927 f1=0.924 false-alarm=3.7% miss=4.2%
+  RF derived=True  trees=40 depth=6 leaf=5  acc=0.925 f1=0.923 false-alarm=4.0% miss=4.6%
+  RF derived=True  trees=40 depth=6 leaf=2  acc=0.925 f1=0.923 false-alarm=3.9% miss=3.3%
+  RF derived=False trees=20 depth=8 leaf=2  acc=0.923 f1=0.920 false-alarm=3.6% miss=4.9%
+  RF derived=True  trees=40 depth=8 leaf=5  acc=0.922 f1=0.920 false-alarm=3.9% miss=4.2%
+  RF derived=True  trees=20 depth=6 leaf=5  acc=0.919 f1=0.917 false-alarm=4.8% miss=4.4%
+
+CHOSEN: RF, derived features=True, trees=40, depth=8, min leaf=2
+Accuracy: 0.927
+
+              precision    recall  f1-score   support
+
+     carried      0.928     0.928     0.928       360
+        idle      0.962     0.967     0.964       420
+       knock      0.954     0.948     0.951       420
+       shake      0.853     0.856     0.854       360
+
+    accuracy                          0.927      1560
+   macro avg      0.924     0.924     0.924      1560
+weighted avg      0.927     0.927     0.927      1560
+
+Confusion matrix (rows = real, columns = predicted)
+classes: ['carried', 'idle', 'knock', 'shake']
+[[334   4   0  22]
+ [  0 406   0  14]
+ [  0   5 398  17]
+ [ 26   7  19 308]]
+
+False alarms (idle/knock predicted as alarm): 3.7%
+Missed tamper (alarm class predicted as idle/knock): 4.2%
+
+Feature importance
+  rot_ratio    0.096
+  gyro_net     0.095
+  mic_mean     0.072
+  acc_mean     0.068
+  mic_burst    0.067
+  gyro_mean    0.067
+  gyro_max     0.062
+  mic_peaks    0.053
+  az_std       0.052
+  acc_cross    0.050
+  mic_per_acc  0.048
+  mic_peak     0.045
+  ax_std       0.042
+  ay_std       0.035
+  jerk_mean    0.030
+  acc_max      0.026
+  gyro_burst   0.025
+  cv           0.021
+  acc_std      0.018
+  burst        0.017
+  axis_dom     0.010
+  acc_peaks    0.002
